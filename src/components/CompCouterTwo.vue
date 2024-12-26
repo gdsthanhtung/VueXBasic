@@ -24,8 +24,14 @@
       }
     },
     computed: {
-      count () {
-        return this.$store.state.countX
+      count: {
+        get(){
+          return this.$store.state.countX;
+        },
+        set(value){
+          console.log('value', value);
+          this.$store.state.countX = value;
+        }
       }
     }
   }
