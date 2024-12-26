@@ -6,8 +6,14 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    countX: 10
-  }
+    countX: 10,
+    valueX: 1000
+  },
+  getters: {
+    countDouble: state => {
+      return state.countX * 2;
+    }
+  },
 })
 
 new Vue({
