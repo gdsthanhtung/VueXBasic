@@ -10,10 +10,24 @@ const store = new Vuex.Store({
     valueX: 1000
   },
   getters: {
+    countX: state => {
+      return state.countX;
+    },
     countDouble: state => {
       return state.countX * 2;
     }
   },
+  mutations: {
+    increment (state) {
+      state.countX++
+    },
+    decrement (state) {
+      state.countX--
+    },
+    incrementByValue (state, value) {
+      state.countX += Number(value)
+    }
+  }
 })
 
 new Vue({

@@ -3,17 +3,20 @@
     <h1>{{ msg }}</h1>
     <CompCounterOne />
     <CompCounterTwo />
+    <CompCounterThree />
   </div>
 </template>
 
 <script>
 import CompCounterOne from './components/CompCouterOne.vue'
 import CompCounterTwo from './components/CompCouterTwo.vue'
+import CompCounterThree from './components/CompCouterThree.vue'
 export default {
   name: 'app',
   components: {
     CompCounterOne,
-    CompCounterTwo
+    CompCounterTwo,
+    CompCounterThree
   },
   data () {
     return {

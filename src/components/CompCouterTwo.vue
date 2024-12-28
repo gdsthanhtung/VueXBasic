@@ -29,7 +29,7 @@ import { mapState, mapGetters } from 'vuex'
         'countDouble' // Lay nhanh gia tri khong can dung bien this.$store.getters.countDouble
       ]),
       ...mapState([
-        'valueX'
+        'valueX' // Lay nhanh gia tri khong can khai bao trong getters
       ]),
       count: {
         get(){
