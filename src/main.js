@@ -21,11 +21,33 @@ const store = new Vuex.Store({
     increment (state) {
       state.countX++
     },
-    decrement (state) {
-      state.countX--
+    decrement (state, value = 0) {
+      state.countX -= value
     },
-    incrementByValue (state, value) {
+    incrementByValue (state, value = 0) {
       state.countX += Number(value)
+    }
+  },
+  actions: {
+    incrementAsync ({ commit, dispatch }) {
+      console.log('incrementAsync');
+      setTimeout(() => {
+        commit('increment')
+        dispatch('testActionCallAction');
+      }, 1000)
+    },
+    decrementAsync ({ commit }, param) {
+      setTimeout(() => {
+        commit('decrement', param.number)
+      }, param.time)
+    },
+    incrementByValueAsync ({ commit }, param) {
+      setTimeout(() => {
+        commit('incrementByValue', param.number)
+      }, param.time)
+    },
+    testActionCallAction ({ commit }) {
+      console.log('testActionCallAction');
     }
   }
 })
