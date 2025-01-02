@@ -4,27 +4,12 @@
       <comp-title />
 
       <b-row>
-        <comp-control
-          v-bind:strSearch="strSearch"
-          v-on:handleStrSearch="handleStrSearch"
-          v-bind:orderSort="orderSort"
-          v-on:handleOrderSort="handleOrderSort"
-        />
+        <comp-control />
 
-        <comp-form
-          v-bind:isShowForm="isShowForm"
-          v-on:handleShowForm="handleShowForm"
-          v-on:handleAddTask="handleAddTask"
-          v-bind:taskSelected="taskSelected"
-          v-on:handleUpdateTask="handleUpdateTask"
-        />
+        <comp-form />
       </b-row>
 
-      <todo-list-table
-        v-bind:listTask="listTaskFiltered"
-        v-on:handleAction="handleAction"
-      />
-
+      <todo-list-table />
     </b-container>
   </div>
 </template>
@@ -34,8 +19,6 @@ import TodoListTable from './components/TodoListTable.vue'
 import CompTitle from './components/CompTitle.vue'
 import CompControl from './components/CompControl.vue'
 import CompForm from './components/CompForm.vue'
-
-import listTask from './mockdatas/listTask'
 
 export default {
   name: 'app',
@@ -47,72 +30,10 @@ export default {
   },
   data() {
     return {
-      listTask,
-      isShowForm: false,
-      strSearch: '',
-      orderSort: {
-        by: 'name',
-        dir: 'asc'
-      },
-      taskSelected: null
+      //
     }
   },
   methods: {
-    handleShowForm() {
-      if (!this.isShowForm) {
-        this.resetTaskSelected();
-      }
-      this.isShowForm = !this.isShowForm;
-    },
-    handleStrSearch(data) {
-      this.strSearch = data;
-    },
-    handleOrderSort(data) {
-      this.orderSort = data;
-    },
-    handleAddTask(newTask) {
-      this.listTask.push(newTask);
-    },
-    handleUpdateTask(newTask) {
-      this.listTask = this.listTask.map(task => {
-        if (task.id === newTask.id) {
-          return newTask;
-        }
-        return task;
-      });
-    },
-    handleAction({ action, data }) {
-      if (action === 'delete') {
-        this.handleDeleteTask(data.id);
-      }
-      if (action === 'edit') {
-        this.handleEditTask(data);
-      }
-    },
-    handleDeleteTask(id) {
-      this.listTask = this.listTask.filter(task => task.id !== id);
-    },
-    handleEditTask(task) {
-      this.isShowForm = true;
-      this.taskSelected = task;
-    },
-    resetTaskSelected() {
-      this.taskSelected = null;
-    }
-  },
-  computed: {
-    listTaskFiltered() {
-      let orderSort = this.orderSort;
-      return this.listTask.filter(task => task.name.toLowerCase().includes(this.strSearch.toLowerCase())).sort((a, b) => {
-        if (a[orderSort.by] < b[orderSort.by]) {
-          return orderSort.dir === 'asc' ? -1 : 1;
-        }
-        if (a[orderSort.by] > b[orderSort.by]) {
-          return orderSort.dir === 'asc' ? 1 : -1;
-        }
-        return 0;
-      });
-    }
 
   }
 }

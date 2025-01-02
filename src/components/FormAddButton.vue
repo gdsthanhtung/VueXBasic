@@ -5,22 +5,21 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 export default {
   name: 'FormAddButton',
-  props: {
-    isShowForm: {
-      type: Boolean,
-      default: false
-    }
-  },
   data() {
     return {
       //title: ''
     };
   },
+  computed: {
+    ...mapState(['isShowForm'])
+  },
   methods: {
+    ...mapActions(['actHandleShowForm']),
     handleShowForm() {
-      this.$emit('handleShowForm');
+      this.actHandleShowForm();
     }
   }
 };

@@ -11,7 +11,8 @@
 </template>
 
 <script>
-import listLevel from '../mockdatas/listLevel';
+import {  mapActions, mapState } from 'vuex';
+
 export default {
   name: 'TodoListItem',
   props: {
@@ -30,17 +31,19 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['actHandleAction']),
     handleAction(action, data) {
       if(action === 'delete' && !confirm('Do you want to delete this task?')) {
         return;
       }
-      this.$emit('handleAction', {action, data});
+      this.actHandleAction({ action, data });
     }
   },
   computed: {
+    ...mapState(['listLevel']),
     level() {
-      const level = listLevel.find(level => level.value === this.task.level);
-      return level ? level : listLevel.find(level => level.value === 99);
+      const level = this.listLevel.find(level => level.value === this.task.level);
+      return level ? level : this.listLevel.find(level => level.value === 99);
     }
   }
 }

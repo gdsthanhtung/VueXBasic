@@ -16,30 +16,22 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 export default {
   name: 'ControlSort',
-  props: {
-    orderSort: {
-     type: Object,
-     default() {
-       return {
-         by: 'name',
-         dir: 'asc'
-       };
-     }
-    }
-  },
   data() {
     return {
       //text: ''
     }
   },
   methods: {
+    ...mapActions(['actHandleOrderSort']),
     handleSort(orderBy, orderDir) {
-      this.$emit('handleOrderSort', { by: orderBy, dir: orderDir });
+      this.actHandleOrderSort({ by: orderBy, dir: orderDir });
     }
   },
   computed: {
+    ...mapState(['orderSort']),
     orderSortText() {
       return `${this.orderSort.by.toUpperCase()} - ${this.orderSort.dir.toUpperCase()}`;
     }

@@ -9,4 +9,14 @@ export default [
     { id: 8, name: 'Learn Java', level: 1 },
     { id: 9, name: 'Learn C#', level: 2 },
     { id: 10, name: 'Learn C++', level: 4},
+    { id: 11, name: 'Learn C', level: 3},
+    { id: 12, name: 'Learn PHP', level: 2},
+    { id: 13, name: 'Learn Ruby', level: 1},
+    { id: 14, name: 'Learn Swift', level: 0},
+    { id: 15, name: 'Learn Kotlin', level: 0},
+    { id: 16, name: 'Learn Go', level: 1},
+    { id: 17, name: 'Learn Rust', level: 2},
+    { id: 18, name: 'Learn Scala', level: 3},
+    { id: 19, name: 'Learn Perl', level: 4},
+    { id: 20, name: 'Learn Haskell', level: 5}
 ];

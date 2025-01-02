@@ -1,7 +1,7 @@
 <template>
   <b-col cols="12" lg="6">
     <!-- ADD : START -->
-    <form-add-button v-bind:isShowForm="isShowForm" v-on:handleShowForm="handleShowForm" />
+    <form-add-button v-on:handleShowForm="handleShowForm" />
     <!-- ADD : END -->
 
     <form v-if="isShowForm" method="POST" class="form-inline justify-content-between">
@@ -24,20 +24,11 @@
 <script>
 import FormAddButton from './FormAddButton.vue';
 import listLevel from '../mockdatas/listLevel';
+import { mapState, mapActions } from 'vuex';
 export default {
   name: 'CompForm',
   components: {
     FormAddButton
-  },
-  props: {
-    isShowForm: {
-      type: Boolean,
-      default: false
-    },
-    taskSelected: {
-      type: Object,
-      default: null
-    }
   },
   data() {
     return {
@@ -59,9 +50,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['actHandleShowForm', 'actHandleAddTask', 'actHandleUpdateTask']),
     handleShowForm() {
       this.resetForm();
-      this.$emit('handleShowForm');
+      this.actHandleShowForm();
     },
     resetForm() {
       this.selectedLevel = null;
@@ -74,11 +66,12 @@ export default {
         level: this.selectedLevel
       };
 
-      this.$emit((this.taskSelected) ? 'handleUpdateTask' : 'handleAddTask', data);
+      this.taskSelected ? this.actHandleUpdateTask(data) : this.actHandleAddTask(data);
       this.handleShowForm();
     }
   },
   computed: {
+    ...mapState(['isShowForm', 'taskSelected']),
     levels() {
       this.listLevel = this.listLevel.filter(level => level.value !== 99);
       return [{ value: null, text: 'Select a Level' }, ...this.listLevel];

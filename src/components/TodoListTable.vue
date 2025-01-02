@@ -13,38 +13,39 @@
 
       <tbody>
         <todo-list-item
-        v-for="(task, index) in listTask"
-        v-bind:key="task.id"
-        v-bind:task="task"
-        v-bind:index="index+1"
-        v-on:handleAction="handleAction" />
+          v-for="(task, index) in listTask"
+          v-bind:key="task.id"
+          v-bind:task="task"
+          v-bind:index="index+1"
+        />
       </tbody>
     </table>
   </div>
 </template>
 
 <script>
+import {  mapGetters, mapActions, mapState } from 'vuex';
 import TodoListItem from './TodoListItem.vue'
 export default {
   name: 'TodoListTable',
   components: {
     TodoListItem
   },
-  props: {
-    listTask: {
-      type: Array,
-      default: []
-    }
-  },
-  methods: {
-    handleAction(data) {
-      this.$emit('handleAction', data);
-    }
+  created() {
+    this.actChangeListTask(this.listTask);
   },
   data() {
     return {
       //text: 'List Task'
     }
+  },
+  computed: {
+    ...mapGetters({
+        'listTask': 'listTaskFiltered'
+    })
+  },
+  methods: {
+    ...mapActions(['actChangeListTask'])
   }
 }
 </script>

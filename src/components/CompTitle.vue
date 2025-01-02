@@ -1,12 +1,12 @@
 <template>
   <div class="page-header">
-    <h1>Project 01 - ToDo List <small>VueJs 000</small></h1>
-    <hr class="my-4">{{ countX }}
+    <h1>Project 01 - ToDo List <small>VueJs</small></h1>
+    <hr class="my-4">
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+
 export default {
   name: 'CompTitle',
   data() {
@@ -15,7 +15,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['countX'])
+
   }
 };
 </script>
